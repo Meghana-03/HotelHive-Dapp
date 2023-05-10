@@ -1,0 +1,16 @@
+{
+  "name": "hotelhive-app",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.2",
+    "@truffle/hdwallet-provider": "^2.0.15",
+    "dotenv": "^16.0.3"
+  }
+}

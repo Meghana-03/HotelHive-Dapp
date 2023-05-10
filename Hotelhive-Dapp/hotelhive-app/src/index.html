@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>HHT - HotelHive Token</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+    integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+    crossorigin="anonymous"></script>
+  <link href="css/toastr.min.css" rel="stylesheet">
+</head>
+
+<body>
+  <div class='container'>
+    <h1 class="mb-3 mt-4 text-center">Hotel Hive Token (HHT)</h1>
+    <hr>
+    <div class='row'>
+      <div class='col-lg-2 forms'>
+        <form>
+          <h3>About Us</h3>
+
+          <p id="myParagraph"></p>
+
+          <script>
+            // use Fetch API to load the JSON data from the file
+            fetch("data.json")
+              .then(response => response.json())
+              .then(data => {
+                // get a reference to the paragraph element
+                var myParagraph = document.getElementById("myParagraph");
+
+                // set the text content of the paragraph element
+                myParagraph.textContent = data.paragraph;
+              })
+              .catch(error => console.error(error));
+          </script>
+        </form>
+      </div>
+      <!-- <div class='row'> -->
+      <div class='col-lg-2 forms'>
+        <form>
+          <h3>Add Room</h3>
+
+          <div class="form-group">
+            <label for="room_price">Price</label>
+            <input type="number" class="form-control" id="room_price" placeholder="Enter price of the room">
+          </div>
+          <button type="button" id='add_room' class="btn btn-info">Add</button>
+        </form>
+      </div>
+      <div class='col-lg-2 forms'>
+        <form>
+          <h3>Book/Cancel</h3>
+          <div class="form-group">
+            <label for="book_cancel_room_id">Room Number</label>
+            <input type="text" class="form-control" id="book_cancel_room_id" placeholder="Enter room number">
+          </div>
+          <button type="button" id='book_room' class="btn btn-info btn-sm">Book Room</button>
+          <button type="button" id='cancel_room' class="btn btn-info btn-sm">Cancel Booking</button>
+        </form>
+      </div>
+      <div class='col-lg-2 forms'>
+        <form>
+          <h3>Check-In/Check-Out</h3>
+          <div class="form-group">
+            <label for="checkin_checkout_room_id">Room Number</label>
+            <input type="text" class="form-control" id="checkin_checkout_room_id" placeholder="Enter room number">
+          </div>
+          <button type="button" id='checkin_room' class="btn btn-info btn-sm">Check-In</button>
+          <button type="button" id='checkout_room' class="btn btn-info btn-sm">Check-Out</button>
+        </form>
+      </div>
+      <div class='col-lg-2 forms'>
+        <form>
+          <h3>Review</h3>
+          <div class="form-group">
+            <label for="review_room_id">Room Number</label>
+            <input type="text" class="form-control" id="review_room_id" placeholder="Enter room number">
+          </div>
+          <button type="button" id='appreciate_room' class="btn btn-info btn-sm">Appreciated</button>
+          <button type="button" id='depreciate_room' class="btn btn-info btn-sm">Depreciated</button>
+        </form>
+      </div>
+    </div>
+
+    <hr>
+    <label for="myDropdown">
+      <h4>Choose an Amenity:</h4>
+    </label>
+    <select id="myDropdown" name="myDropdown" onchange="myOnChangeFunction()">
+      <option value="select" data-color="red">Select</option>
+      <option value="AC" data-color="red">AC</option>
+      <option value="View" data-color="yellow">Good View</option>
+    </select>
+    <span id="amenity">
+
+    </span>
+    <script>
+      function myOnChangeFunction() {
+        // get the dropdown element
+        const myDropdown = document.getElementById("myDropdown");
+        // get the selected option element
+        const selectedOption = myDropdown.options[myDropdown.selectedIndex];
+
+        // get the value and custom data of the selected option
+        const selectedValue = selectedOption.value;
+        if (selectedValue == "AC") {
+          var mySpan = document.getElementById("amenity");
+          mySpan.textContent = "An AC room would cost you 10ETH additionally";
+        }
+        else if (selectedValue == "View") {
+          var mySpan = document.getElementById("amenity");
+          mySpan.textContent = "A room with a beautiful view would cost you 15ETH additionally";
+        }
+      }
+    </script>
+    <hr>
+
+    <div class='col-lg-12'>
+      <h5 id="currentUserAddress"></h5>
+    </div>
+    <hr>
+    <div class='col-lg-13'>
+      <h5 id="roomsAvailable">Rooms</h5>
+    </div>
+  </div>
+  </div>
+  <script>
+    // Get all the buttons on the page
+var buttons = document.getElementsByTagName("button");
+
+// Loop through all the buttons and add an onclick event listener to each one
+// for (var i = 0; i < buttons.length; i++) {
+//     buttons[i].addEventListener("click", function() {
+//         // Reload the page when a button is clicked
+//         location.reload();
+//     });
+// }
+  </script>
+  <style>
+    .container {
+      margin-left: 5%;
+      margin-right: 5%;
+      padding-left: 0;
+      padding-right: 0;
+      max-width: -webkit-fill-available;
+    }
+
+    .forms {
+      margin-right: 3%;
+      border-right: 1px solid #bebebe;
+    }
+  </style>
+</body>
+<script src="js/toastr.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/ethereum/web3.js@1.0.0-beta.37/dist/web3.min.js"></script>
+<script src="js/app.js"></script>
+
+</html>
